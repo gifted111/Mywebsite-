@@ -9,6 +9,11 @@
         .content {
             display: none;
         }
+        .error {
+            color: red;
+            font-size: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -20,18 +25,23 @@
         <iframe src="https://www.google.com" width="600" height="400"></iframe>
     </div>
 
+    <!-- Error Message -->
+    <div class="error" id="errorMessage" style="display:none;">
+        You cannot access this content directly. Please use the correct page.
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const referer = document.referrer;  // Get the referring page URL
 
-            // Check if the referer is from the button page
+            // Check if the referer is from the button page (index.html)
             if (referer.includes('index.html')) {
                 // Show the content if the referer is correct
                 document.getElementById('embeddedContent').style.display = 'block';
             } else {
-                // If the referer is not valid, alert the user and hide the content
-                alert('You cannot view this content directly. Please go through the correct page.');
-                window.location.href = 'index.html';  // Redirect to the button page
+                // If the referer is not valid, show the error message
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('embeddedContent').style.display = 'none';
             }
         });
     </script>
