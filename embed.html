@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Content</title>
+    <style>
+        /* Initially hide the content */
+        .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Embedded Content (Only via Button)</h1>
+    
+    <!-- Hidden content that will only show if the referer is correct -->
+    <div class="content" id="embeddedContent">
+        <h2>Here is the embedded content:</h2>
+        <iframe src="https://www.google.com" width="600" height="400"></iframe>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const referer = document.referrer;  // Get the referring page URL
+
+            // Check if the referer is from the button page
+            if (referer.includes('index.html')) {
+                // Show the content if the referer is correct
+                document.getElementById('embeddedContent').style.display = 'block';
+            } else {
+                // If the referer is not valid, alert the user and hide the content
+                alert('You cannot view this content directly. Please go through the correct page.');
+                window.location.href = 'index.html';  // Redirect to the button page
+            }
+        });
+    </script>
+</body>
+</html>
